@@ -2,7 +2,7 @@
 
 A minimal, responsive developer portfolio built with React.js, TypeScript, and Tailwind CSS. It features smooth animations using Framer Motion and GSAP.
 
-| ![Portfolio](./public/project-1-light.png) | ![Portfolio](./public/project-1-dark.png) |
+
 
 ### [Live Demo](https://priyanshu-tarsauliya-portfolio.netlify.app/)
 
