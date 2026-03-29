@@ -1,5 +1,5 @@
 import About from "./components/About";
-import Blogs from "./components/Blogs.tsx";
+
 import Cursor from "./components/Cursor";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
@@ -19,7 +19,6 @@ function App() {
             <Header />
             <About />
             <Projects />
-            <Blogs />
             <Experience />
           </main>
           <Footer />
