@@ -22,7 +22,7 @@ To get started, follow these steps:
 
 1. Clone the repository:
 
-```bash
+```bash[
 git clone https://github.com/n4ryn/portfolio-v1.git
 ```
 
@@ -46,7 +46,6 @@ You can customize the portfolio by modifying the following files:
 
 - `src/constants/about.ts`: Define about yourself here.
 - `src/constants/projects.ts`: Define your projects here.
-- `src/constants/experience.ts`: Define your experiences here.
 - `src/constants/socials.ts`: Define your social media links here.
 
 ## Contributing
