@@ -42,7 +42,7 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
 
   return (
     <motion.div
-      className="rounded-xl shadow-lg shadow-[#14eba3]/20 hover:shadow-[#14eba3]/40 border-b-2 border-l-2 border-[#14eba3]/30"
+      className="rounded-xl shadow-md shadow-accent/10 hover:shadow-accent/30 border border-border-primary/50 bg-background-primary transition-all duration-300"
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
@@ -92,7 +92,7 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
           <motion.div className="flex flex-wrap gap-2 mt-4">
             {project.techStack.map((item, index) => (
               <p
-                className="text-[10px] px-1.5 py-1 rounded-md text-border-primary hover:text-border-primary-hover hover:bg-[#14eba3]/20 transition duration-500 ease-in-out border border-border-primary cursor-pointer"
+                className="text-[10px] px-2 py-1 rounded-md text-text-secondary hover:text-text-primary hover:bg-accent/20 transition-all duration-300 border border-border-primary/50 cursor-pointer"
                 key={index}
               >
                 {item}

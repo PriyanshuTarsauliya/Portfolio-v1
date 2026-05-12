@@ -22,8 +22,6 @@
   --color-button-secondary-hover: theme("colors.neutral.300");
 
   --color-border-primary: theme("colors.neutral.400");
-
-  --color-border-primary: theme("colors.neutral.600");
   --color-border-primary-hover: theme("colors.neutral.900");
 }
 
@@ -36,7 +34,7 @@
   /* Background Colors */
   --color-background-primary: theme("colors.neutral.900");
   --color-background-primary-hover: theme("colors.neutral.200");
-  --color-background-secondary: theme("colors.neutral.700");
+  --color-background-secondary: theme("colors.neutral.800");
   --color-background-tertiary: theme("colors.neutral.100");
 
   /* Button Colors */
@@ -46,28 +44,32 @@
   --color-button-secondary: theme("colors.neutral.800");
   --color-button-secondary-hover: theme("colors.neutral.700");
 
-  --color-border-primary: theme("colors.neutral.400");
-
-  --color-border-primary: theme("colors.neutral.300");
+  --color-border-primary: theme("colors.neutral.600");
   --color-border-primary-hover: theme("colors.neutral.100");
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-button-primary text-button-text px-2 py-2 rounded-lg 
-           transition-colors duration-200 
-           hover:bg-button-primary-hover;
+    @apply bg-button-primary text-button-text px-4 py-2 rounded-lg 
+           transition-all duration-200 shadow-sm
+           hover:bg-button-primary-hover hover:shadow-md hover:-translate-y-0.5
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary
+           active:scale-95 active:translate-y-0 font-medium;
   }
 
   .btn-secondary {
-    @apply bg-button-secondary text-text-primary px-2 py-2 rounded-lg 
-           transition-colors duration-200 
-           hover:bg-button-secondary-hover;
+    @apply bg-button-secondary text-text-primary px-4 py-2 rounded-lg 
+           transition-all duration-200 shadow-sm
+           hover:bg-button-secondary-hover hover:shadow-md hover:-translate-y-0.5
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary
+           active:scale-95 active:translate-y-0 font-medium;
   }
 
   .btn-outline {
-    @apply border-2 border-button-primary text-text-primary px-2 py-2 rounded-lg 
-           transition-colors duration-200 
-           hover:bg-button-secondary;
+    @apply border border-button-primary text-text-primary px-4 py-2 rounded-lg 
+           transition-all duration-200
+           hover:bg-button-secondary hover:shadow-sm
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary
+           active:scale-95 font-medium bg-transparent;
   }
 }

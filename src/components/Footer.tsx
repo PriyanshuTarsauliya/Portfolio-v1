@@ -40,7 +40,7 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="w-full py-6 mt-auto border-t border-gray-200 dark:border-gray-800"
+      className="w-full py-6 mt-auto border-t border-border-primary/30"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

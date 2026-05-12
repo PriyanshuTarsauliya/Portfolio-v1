@@ -101,7 +101,7 @@ const About = () => {
       </motion.h1>
 
       <motion.p
-        className="text-text-secondary font-light text-md mt-6 mb-8 leading-6 text-justify"
+        className="text-text-secondary font-light text-md mt-6 mb-8 leading-6 text-justify max-w-4xl"
         variants={itemVariants}
       >
         {DESCRIPTION_TEXT.parts.map((part, index) =>

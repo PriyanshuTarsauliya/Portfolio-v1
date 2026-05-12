@@ -24,7 +24,7 @@ const Experience = () => {
       variants={containerVariants}
     >
       <motion.h2
-        className="font-semibold italic text-xl text-text-primary mb-6"
+        className="font-semibold text-3xl text-text-primary mb-8"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

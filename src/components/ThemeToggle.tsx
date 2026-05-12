@@ -86,7 +86,7 @@ const ThemeToggle = () => {
               exit="exit"
               variants={sunVariants}
             >
-              <RxSun className="w-6 h-6 text-yellow-400 hover:text-[#14eba3]" />
+              <RxSun className="w-6 h-6 text-yellow-400 hover:text-accent transition-colors duration-200" />
             </motion.div>
           ) : (
             <motion.div
@@ -97,7 +97,7 @@ const ThemeToggle = () => {
               exit="exit"
               variants={moonVariants}
             >
-              <RxMoon className="w-6 h-6 text-gray-400 hover:text-[#14eba3]" />
+              <RxMoon className="w-6 h-6 text-gray-400 hover:text-accent transition-colors duration-200" />
             </motion.div>
           )}
         </AnimatePresence>

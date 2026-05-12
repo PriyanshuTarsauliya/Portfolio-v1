@@ -3,7 +3,14 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
       colors: {
+        accent: {
+          DEFAULT: "#14eba3",
+          hover: "#0dbd80",
+        },
         text: {
           primary: "var(--color-text-primary)",
           "primary-hover": "var(--color-text-primary-hover)",
@@ -21,9 +28,6 @@ export default {
           secondary: "var(--color-button-secondary)",
           "secondary-hover": "var(--color-button-secondary-hover)",
           text: "var(--color-button-text)",
-        },
-        border: {
-          primary: "var(--color-border-primary)",
         },
         border: {
           primary: "var(--color-border-primary)",

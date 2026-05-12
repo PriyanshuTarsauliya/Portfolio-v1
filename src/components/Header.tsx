@@ -54,7 +54,7 @@ const Header = () => {
           <img
             src="/profile.jpeg"
             alt="Priyanshu Tarsauliya"
-            className="h-12 w-12 rounded-full shadow-[#14eba3_-3px_0px_4px_0px] object-cover"
+            className="h-12 w-12 rounded-full shadow-[0_0_15px_rgba(20,235,163,0.3)] object-cover ring-2 ring-accent/30"
           />
         </motion.a>
         <div className="flex flex-col">
