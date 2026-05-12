@@ -41,30 +41,32 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
       : project.image[0];
 
   return (
-    <motion.div
-      className="rounded-xl shadow-md shadow-accent/10 hover:shadow-accent/30 border border-border-primary/50 bg-background-primary transition-all duration-300"
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-    >
+    <div className="relative group rounded-xl">
+      <div className="absolute -inset-[1px] bg-gradient-to-r from-accent to-blue-500 rounded-xl opacity-0 group-hover:opacity-40 blur-md transition duration-500" />
       <motion.div
-        className="overflow-hidden rounded-xl"
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.2 }}
+        className="relative h-full rounded-xl shadow-md shadow-accent/5 border border-border-primary/50 bg-background-primary transition-all duration-300"
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        whileHover={{ y: -6, scale: 1.01 }}
+        transition={{ duration: 0.3 }}
       >
-        <motion.img
-          src={imageToUse}
-          alt={project.title}
-          className="aspect-[16/10] h-full w-full"
-          loading="lazy"
-          variants={imageVariants}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4 }}
-        />
-      </motion.div>
+        <motion.div
+          className="overflow-hidden rounded-t-xl"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+        >
+          <motion.img
+            src={imageToUse}
+            alt={project.title}
+            className="aspect-[16/10] h-full w-full object-cover"
+            loading="lazy"
+            variants={imageVariants}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.5 }}
+          />
+        </motion.div>
 
       <motion.div className="p-3 flex flex-col gap-2" variants={cardVariants}>
         <div>
@@ -102,31 +104,36 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
         </div>
 
         <div className="mt-4 flex justify-around items-center gap-2">
-          <motion.a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary text-xs flex justify-center items-center gap-2 w-1/2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Github
-            <RxGithubLogo className="h-4 w-4" />
-          </motion.a>
-          <motion.a
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary text-xs flex justify-center items-center gap-2 w-1/2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Website
-            <RxArrowTopRight className="h-4 w-4" />
-          </motion.a>
+          {project.github && (
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-xs flex justify-center items-center gap-2 w-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Github
+              <RxGithubLogo className="h-4 w-4" />
+            </motion.a>
+          )}
+          {project.live && (
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-xs flex justify-center items-center gap-2 w-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Website
+              <RxArrowTopRight className="h-4 w-4" />
+            </motion.a>
+          )}
         </div>
       </motion.div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 };
 

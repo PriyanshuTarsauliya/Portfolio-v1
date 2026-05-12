@@ -17,26 +17,26 @@ export default function Cursor() {
     mouse.current = { x: e.clientX, y: e.clientY };
   };
 
-  const animate = () => {
-    const { x, y } = delayedMouse.current;
-    delayedMouse.current = {
-      x: lerp(x, mouse.current.x, 0.075),
-      y: lerp(y, mouse.current.y, 0.075),
-    };
-    moveCircle(delayedMouse.current.x, delayedMouse.current.y);
-    rafId.current = window.requestAnimationFrame(animate);
-  };
-
-  const moveCircle = (x: number, y: number) => {
-    gsap.set(circle.current, {
-      x,
-      y,
-      xPercent: -50,
-      yPercent: -50,
-    });
-  };
-
   useEffect(() => {
+    const moveCircle = (x: number, y: number) => {
+      gsap.set(circle.current, {
+        x,
+        y,
+        xPercent: -50,
+        yPercent: -50,
+      });
+    };
+
+    const animate = () => {
+      const { x, y } = delayedMouse.current;
+      delayedMouse.current = {
+        x: lerp(x, mouse.current.x, 0.075),
+        y: lerp(y, mouse.current.y, 0.075),
+      };
+      moveCircle(delayedMouse.current.x, delayedMouse.current.y);
+      rafId.current = window.requestAnimationFrame(animate);
+    };
+
     animate();
     window.addEventListener("mousemove", manageMouseMove);
     return () => {

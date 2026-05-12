@@ -7,10 +7,10 @@ import BlogCard from "./BlogCard";
 
 import { BlogType } from "../types";
 
+const QUERY = `query { publication(host: "n4ryn.hashnode.dev") { posts(first: 3) { edges { node { title url brief publishedAt } } } } }`;
+
 const Blogs = () => {
   const [data, setData] = useState<BlogType[]>([]);
-
-  const QUERY = `query { publication(host: "n4ryn.hashnode.dev") { posts(first: 3) { edges { node { title url brief publishedAt } } } } }`;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,21 +29,21 @@ const Blogs = () => {
     },
   };
 
-  const fetchBlogs = async () => {
-    try {
-      const response = await axios.post(
-        "https://gql.hashnode.com/",
-        { query: QUERY, variables: { page: 0 } },
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      setData(response.data?.data?.publication?.posts?.edges ?? []);
-    } catch (error) {
-      console.error("Error fetching blogs:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.post(
+          "https://gql.hashnode.com/",
+          { query: QUERY, variables: { page: 0 } },
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        setData(response.data?.data?.publication?.posts?.edges ?? []);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
     fetchBlogs();
   }, []);
 
