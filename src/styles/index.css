@@ -73,3 +73,50 @@
            active:scale-95 font-medium bg-transparent;
   }
 }
+
+/* 3D Perspective and Depth Utilities */
+.perspective-800 {
+  perspective: 800px;
+}
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-1500 {
+  perspective: 1500px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+.translate-z-40 {
+  transform: translateZ(40px);
+}
+.translate-z-50 {
+  transform: translateZ(50px);
+}
+
+/* Custom 3D Glare sheen animation */
+@keyframes sheen-wave {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(45deg);
+  }
+}
+
+.animate-sheen {
+  animation: sheen-wave 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+

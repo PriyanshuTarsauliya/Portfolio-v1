@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { RxChevronUp } from "react-icons/rx";
+import Magnetic from "./ui/Magnetic";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 400) {
+      if (window.scrollY > 350) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -28,18 +29,22 @@ const ScrollToTop = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-[90] p-3 bg-accent rounded-full text-background-primary shadow-[0_0_15px_rgba(20,235,163,0.4)] transition-all hover:bg-accent/90"
-          aria-label="Scroll to top"
-        >
-          <RxChevronUp className="h-6 w-6 font-bold" />
-        </motion.button>
+        <div className="fixed bottom-6 right-6 z-[95]">
+          <Magnetic strength={0.3}>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.5, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.5, y: 20 }}
+              whileHover={{ scale: 1.12, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={scrollToTop}
+              className="p-3 bg-accent rounded-full text-background-primary shadow-[0_0_20px_rgba(20,235,163,0.5)] transition-all hover:bg-accent/90 cursor-pointer flex items-center justify-center ring-2 ring-background-primary"
+              aria-label="Scroll to top"
+            >
+              <RxChevronUp className="h-5 w-5 font-bold" />
+            </motion.button>
+          </Magnetic>
+        </div>
       )}
     </AnimatePresence>
   );

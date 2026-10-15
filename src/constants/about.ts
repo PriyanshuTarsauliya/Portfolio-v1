@@ -1,8 +1,16 @@
-export const INTRO_TEXT = "Crafting scalable software solutions.";
+export const INTRO_TEXT = "Full-Stack Software Engineer • AI & ML";
 export const DESCRIPTION_TEXT = {
   parts: [
     {
-      text: "As a Software Developer, I leverage modern tech stacks like ",
+      text: "Full-Stack Software Engineer (B.Tech, AI & ML) who shipped 2 production web platforms serving 150+ real users during freelance engagements using ",
+      highlight: false,
+    },
+    {
+      text: "Java",
+      highlight: true,
+    },
+    {
+      text: ", ",
       highlight: false,
     },
     {
@@ -10,7 +18,7 @@ export const DESCRIPTION_TEXT = {
       highlight: true,
     },
     {
-      text: " and ",
+      text: ", and ",
       highlight: false,
     },
     {
@@ -18,32 +26,25 @@ export const DESCRIPTION_TEXT = {
       highlight: true,
     },
     {
-      text: " to build scalable applications. My expertise spans across ",
+      text: ". Certified in ",
       highlight: false,
     },
     {
-      text: "Full-Stack Development",
+      text: "Microsoft Azure Fundamentals (828/1000)",
       highlight: true,
     },
     {
-      text: " and ",
+      text: " and AWS Academy Cloud Foundations. Solved ",
       highlight: false,
     },
     {
-      text: "Cloud Computing",
+      text: "500+ DSA problems",
       highlight: true,
     },
     {
-      text: " with certifications in Azure/AWS. Having solved over ",
-      highlight: false,
-    },
-    {
-      text: "500+ problems",
-      highlight: true,
-    },
-    {
-      text: " on LeetCode and CodeChef, I aim to tackle complex challenges and engineer high-quality results.",
+      text: " across LeetCode, HackerEarth (5-Star Coder), and CodeChef to engineer scalable and high-performance digital systems.",
       highlight: false,
     },
   ],
 };
+

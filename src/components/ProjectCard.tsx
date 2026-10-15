@@ -2,33 +2,21 @@ import { RxArrowTopRight, RxGithubLogo } from "react-icons/rx";
 import { motion } from "motion/react";
 
 import { useTheme } from "../context/theme.context.tsx";
-
 import { ProjectType } from "../types";
+import Tilt3D from "./ui/Tilt3D";
+import Magnetic from "./ui/Magnetic";
 
 const ProjectCard = ({ project }: { project: ProjectType }) => {
   const { isDarkMode } = useTheme();
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const imageVariants = {
-    hidden: { scale: 1.1, opacity: 0, y: 20 },
-    visible: {
-      scale: 1,
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        delay: 0.2,
+        ease: "easeOut",
       },
     },
   };
@@ -41,99 +29,132 @@ const ProjectCard = ({ project }: { project: ProjectType }) => {
       : project.image[0];
 
   return (
-    <div className="relative group rounded-xl">
-      <div className="absolute -inset-[1px] bg-gradient-to-r from-accent to-blue-500 rounded-xl opacity-0 group-hover:opacity-40 blur-md transition duration-500" />
-      <motion.div
-        className="relative h-full rounded-xl shadow-md shadow-accent/5 border border-border-primary/50 bg-background-primary transition-all duration-300"
-        variants={cardVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        whileHover={{ y: -6, scale: 1.01 }}
-        transition={{ duration: 0.3 }}
+    <motion.div
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      className="h-full"
+    >
+      <Tilt3D
+        maxTilt={11}
+        scale={1.02}
+        glare={true}
+        className="h-full group"
       >
-        <motion.div
-          className="overflow-hidden rounded-t-xl"
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
+        {/* Dynamic 3D ambient aura glow behind the card */}
+        <div className="absolute -inset-[2px] bg-gradient-to-r from-accent/30 via-emerald-500/20 to-blue-500/30 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 -z-10" />
+
+        <div
+          style={{ transformStyle: "preserve-3d" }}
+          className="relative h-full rounded-2xl shadow-lg shadow-black/5 dark:shadow-accent/5 border border-border-primary/50 group-hover:border-accent/50 bg-background-primary/95 backdrop-blur-md transition-all duration-300 flex flex-col justify-between overflow-hidden"
         >
-          <motion.img
-            src={imageToUse}
-            alt={project.title}
-            className="aspect-[16/10] h-full w-full object-cover"
-            loading="lazy"
-            variants={imageVariants}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.5 }}
-          />
-        </motion.div>
+          {/* Top Image Preview Layer with 3D Depth */}
+          <div
+            style={{ transform: "translateZ(22px)", transformStyle: "preserve-3d" }}
+            className="overflow-hidden rounded-t-2xl relative"
+          >
+            <motion.div
+              className="relative aspect-[16/10] w-full overflow-hidden bg-background-secondary/40"
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.4 }}
+            >
+              <img
+                src={imageToUse}
+                alt={project.title}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-primary/80 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-300" />
+            </motion.div>
+          </div>
 
-      <motion.div className="p-3 flex flex-col gap-2" variants={cardVariants}>
-        <div>
-          <motion.h3
-            className="text-md font-semibold text-text-primary"
-            whileHover={{ x: 4 }}
-            transition={{ duration: 0.2 }}
+          {/* Card Content with Multi-Layer 3D Depth */}
+          <div
+            style={{ transform: "translateZ(26px)", transformStyle: "preserve-3d" }}
+            className="p-5 flex flex-col flex-grow justify-between gap-4"
           >
-            {project.title}
-          </motion.h3>
-          <motion.p
-            className="mt-0 text-xs font-normal text-text-secondary"
-            variants={cardVariants}
-            transition={{ delay: 0.4 }}
-          >
-            {project.projectStart} - {project.projectEnd}
-          </motion.p>
-          <motion.p
-            className="mt-4 text-xs font-light text-text-primary line line-clamp-3"
-            variants={cardVariants}
-            transition={{ delay: 0.4 }}
-          >
-            {project.description}
-          </motion.p>
-          <motion.div className="flex flex-wrap gap-2 mt-4">
-            {project.techStack.map((item, index) => (
+            <div>
+              <div className="flex justify-between items-start gap-2 mb-1.5">
+                <h3
+                  style={{ transform: "translateZ(15px)" }}
+                  className="text-lg font-bold text-text-primary group-hover:text-accent transition-colors duration-300"
+                >
+                  {project.title}
+                </h3>
+                <span
+                  style={{ transform: "translateZ(12px)" }}
+                  className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-background-secondary/60 text-text-secondary border border-border-primary/40 whitespace-nowrap"
+                >
+                  {project.projectStart} - {project.projectEnd}
+                </span>
+              </div>
+
               <p
-                className="text-[10px] px-2 py-1 rounded-md text-text-secondary hover:text-text-primary hover:bg-accent/20 transition-all duration-300 border border-border-primary/50 cursor-pointer"
-                key={index}
+                style={{ transform: "translateZ(10px)" }}
+                className="mt-2 text-xs font-normal text-text-secondary line-clamp-3 leading-relaxed"
               >
-                {item}
+                {project.description}
               </p>
-            ))}
-          </motion.div>
-        </div>
 
-        <div className="mt-4 flex justify-around items-center gap-2">
-          {project.github && (
-            <motion.a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-xs flex justify-center items-center gap-2 w-full"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              {/* Tech Stack Pills in 3D Depth */}
+              <div
+                style={{ transform: "translateZ(20px)" }}
+                className="flex flex-wrap gap-1.5 mt-4"
+              >
+                {project.techStack.map((item, index) => (
+                  <motion.span
+                    key={index}
+                    whileHover={{ scale: 1.08, y: -2 }}
+                    className="text-[11px] px-2.5 py-1 rounded-md text-text-secondary hover:text-text-primary hover:bg-accent/15 hover:border-accent/40 bg-background-secondary/40 transition-all duration-200 border border-border-primary/40 cursor-default font-mono"
+                  >
+                    {item}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Buttons Layer with Magnetic Effect */}
+            <div
+              style={{ transform: "translateZ(32px)" }}
+              className="mt-2 pt-3 border-t border-border-primary/30 flex justify-between items-center gap-3"
             >
-              Github
-              <RxGithubLogo className="h-4 w-4" />
-            </motion.a>
-          )}
-          {project.live && (
-            <motion.a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-xs flex justify-center items-center gap-2 w-full"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Website
-              <RxArrowTopRight className="h-4 w-4" />
-            </motion.a>
-          )}
+              {project.github && (
+                <Magnetic strength={0.2} className="w-full">
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-xs flex justify-center items-center gap-2 w-full py-2 rounded-lg border border-border-primary/50 hover:border-accent/50"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.96 }}
+                  >
+                    <RxGithubLogo className="h-4 w-4" />
+                    <span>Code</span>
+                  </motion.a>
+                </Magnetic>
+              )}
+
+              {project.live && (
+                <Magnetic strength={0.2} className="w-full">
+                  <motion.a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-xs flex justify-center items-center gap-2 w-full py-2 rounded-lg shadow-sm hover:shadow-accent/25"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.96 }}
+                  >
+                    <span>Live Demo</span>
+                    <RxArrowTopRight className="h-4 w-4" />
+                  </motion.a>
+                </Magnetic>
+              )}
+            </div>
+          </div>
         </div>
-      </motion.div>
-      </motion.div>
-    </div>
+      </Tilt3D>
+    </motion.div>
   );
 };
 

@@ -1,13 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 import { useCursor } from "../context/cursor.context";
 
 export default function Cursor() {
   const { isActive, cursorSize } = useCursor();
+  const [isTouch, setIsTouch] = useState(false);
 
-  const mouse = useRef({ x: -10, y: -10 });
-  const delayedMouse = useRef({ x: 0, y: 0 });
+  const mouse = useRef({ x: -100, y: -100 });
+  const delayedMouse = useRef({ x: -100, y: -100 });
   const rafId = useRef<number | null>(null);
   const circle = useRef<HTMLDivElement>(null);
 
@@ -18,46 +19,60 @@ export default function Cursor() {
   };
 
   useEffect(() => {
-    const moveCircle = (x: number, y: number) => {
-      gsap.set(circle.current, {
-        x,
-        y,
-        xPercent: -50,
-        yPercent: -50,
-      });
-    };
+    if (typeof window !== "undefined") {
+      const touchDetected =
+        window.matchMedia("(pointer: coarse)").matches ||
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0;
+      setIsTouch(touchDetected);
 
-    const animate = () => {
-      const { x, y } = delayedMouse.current;
-      delayedMouse.current = {
-        x: lerp(x, mouse.current.x, 0.075),
-        y: lerp(y, mouse.current.y, 0.075),
+      if (touchDetected) return;
+
+      const moveCircle = (x: number, y: number) => {
+        if (!circle.current) return;
+        gsap.set(circle.current, {
+          x,
+          y,
+          xPercent: -50,
+          yPercent: -50,
+        });
       };
-      moveCircle(delayedMouse.current.x, delayedMouse.current.y);
-      rafId.current = window.requestAnimationFrame(animate);
-    };
 
-    animate();
-    window.addEventListener("mousemove", manageMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", manageMouseMove);
-      if (rafId.current !== null) window.cancelAnimationFrame(rafId.current);
-    };
+      const animate = () => {
+        const { x, y } = delayedMouse.current;
+        delayedMouse.current = {
+          x: lerp(x, mouse.current.x, 0.085),
+          y: lerp(y, mouse.current.y, 0.085),
+        };
+        moveCircle(delayedMouse.current.x, delayedMouse.current.y);
+        rafId.current = window.requestAnimationFrame(animate);
+      };
+
+      animate();
+      window.addEventListener("mousemove", manageMouseMove);
+
+      return () => {
+        window.removeEventListener("mousemove", manageMouseMove);
+        if (rafId.current !== null) window.cancelAnimationFrame(rafId.current);
+      };
+    }
   }, []);
 
+  if (isTouch) return null;
+
   return (
-    <div className="relative z-[9999] pointer-events-none">
+    <div className="relative z-[9999] pointer-events-none hidden md:block">
       <div
         ref={circle}
         style={{
           width: cursorSize,
           height: cursorSize,
-          backgroundColor: "rgb(20, 235, 163, 0.3)",
+          backgroundColor: "rgba(20, 235, 163, 0.25)",
           border: "1px solid #14eba3",
-          filter: `blur(${isActive ? 20 : 0}px)`,
-          transition: `width 0.2s ease, height 0.2s ease, filter 0.2s ease`,
+          filter: `blur(${isActive ? 16 : 0}px)`,
+          transition: `width 0.2s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease`,
         }}
-        className="fixed top-0 left-0 rounded-full mix-blend-difference"
+        className="fixed top-0 left-0 rounded-full mix-blend-difference pointer-events-none"
       />
     </div>
   );
